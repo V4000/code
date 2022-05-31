@@ -1,0 +1,16 @@
+declare
+rn info.rollno%type;
+rm info.name%type;
+br info.branch%type;
+cursor c_info is select * from info minus select * from info1;
+begin
+open c_info;
+loop
+fetch c_info into rn,rm,br;
+exit when c_info%notfound;
+insert into info1 values (rn,rm,br);
+dbms_output.put_line(rn || ' ' ||rm||' '||br);
+end loop;
+close c_info;
+end;
+/

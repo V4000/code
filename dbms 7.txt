@@ -1,0 +1,8 @@
+create or replace trigger lib_trigger
+after delete or update on library_1
+refrencing old as o new as n
+for each row
+begin
+insert into library_audit values(:o.rollno,:o.name,:o.name_of_book);
+end;
+/

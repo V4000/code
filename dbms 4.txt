@@ -1,0 +1,21 @@
+
+ create or replace procedure book( r in number)
+ as
+ c number ;
+ begin
+ select to_number(trunc(sysdate-doi)) into c from Borrower where rollno=r;
+ if c>=15 and c<30 then
+ c:=c-15;
+ insert into fine values (r,sysdate,'');
+ update fine set ami=(c*5) where rollno=r;
+ elsif c>30 then
+ c:=c-30;
+ insert into fine values (r,sysdate,'');
+ update fine set ami=(c*50)+75 where rollno=r;
+ end if;
+ update Borrower set status='R' where rollno=r;
+ EXCEPTION
+ WHEN no_data_found THEN
+ dbms_output.put_line('no such roll no found');
+ end;
+ /

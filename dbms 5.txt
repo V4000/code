@@ -1,0 +1,24 @@
+create or replace procedure test(roll in number)
+as
+t student.total_marks%type;
+begin
+create or replace procedure test(roll in number)
+as
+t student.total_marks%type;
+begin
+select m.total_marks into t from student m where m.rollno=roll;
+if(t<1500 and t>=900) then
+update result set class='Destination' where rollno=roll;
+dbms_output.put_line(roll);
+dbms_output.put_line('Destination');
+elsif(t<=989 and t>900) then
+update result set class='first class' where rollno=roll;
+dbms_output.put_line('first class');
+elsif(t<899 and t>825) then
+update result set class='second class' where rollno=roll;
+dbms_output.put_line('Second class');
+else
+update result set class='Pass' where rollno=roll;
+end if;
+end;
+/
