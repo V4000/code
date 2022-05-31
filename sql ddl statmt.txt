@@ -1,0 +1,4 @@
+create database student;
+use student;
+creat table emp(emid int,emname(20),primary key(emid));
+desc emp;
